@@ -2,6 +2,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { useOrganization, useOrganizationList } from "@clerk/nextjs";
 import Image from "next/image";
+import Hint from "@/components/hint";
 
 interface ItemProp {
   id: string;
@@ -22,16 +23,18 @@ const Item = ({ id, name, imageUrl }: ItemProp) => {
   };
   return (
     <div className="aspect-square relative">
-      <Image
-        fill
-        src={imageUrl}
-        alt={name}
-        onClick={handleClick}
-        className={cn(
-          " rounded-md  cursor-pointer  opacity-75 hover:opacity-100 transition",
-          isActive && "opacity-100"
-        )}
-      />
+      <Hint label={name} side="right" aling="start" sideOffset={18}>
+        <Image
+          fill
+          src={imageUrl}
+          alt={name}
+          onClick={handleClick}
+          className={cn(
+            " rounded-md  cursor-pointer  opacity-75 hover:opacity-100 transition",
+            isActive && "opacity-100"
+          )}
+        />
+      </Hint>
     </div>
   );
 };
