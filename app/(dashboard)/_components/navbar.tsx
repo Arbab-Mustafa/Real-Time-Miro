@@ -9,6 +9,7 @@ const Navbar = () => {
       <div className="hidden lg:flex lg:flex-1 ">
         <SearchInput />
       </div>
+      <div className="block"></div>
 
       <UserButton />
     </div>
