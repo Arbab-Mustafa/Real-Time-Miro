@@ -13,7 +13,7 @@ const OrgInviteBtn = () => {
           <Plus className="w-4 h-4 mr-2" /> Invite Member
         </Button>
       </DialogTrigger>
-      <DialogContent className="p-0 bg-transparent border-none max-w-[880px] mx-auto">
+      <DialogContent className="p-0 bg-transparent border-none   max-w-[820px]  ">
         <OrganizationProfile />
       </DialogContent>
     </Dialog>
