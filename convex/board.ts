@@ -1,7 +1,12 @@
 import { v } from "convex/values";
 import { mutation } from "./_generated/server";
 
-const images = [];
+const images = [
+  "/public/1.jpg",
+  "/public/2.jpg",
+  "/public/3.jpg",
+  "/public/4.jpg",
+];
 
 export const create = mutation({
   args: {
@@ -9,7 +14,7 @@ export const create = mutation({
     title: v.string(),
   },
   handler: async (ctx, args) => {
-    const identity = ctx.auth.getUserIdentity();
+    const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
       throw new Error("Not authenticated");
     }
