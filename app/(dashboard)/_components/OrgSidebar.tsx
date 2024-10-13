@@ -20,12 +20,12 @@ const OrgSidebar = () => {
   const favorite = searchParams.get("favorites");
 
   return (
-    <div className="hidden md:flex flex-col    space-y-6 pl-5 pt-5 w-[206px]">
+    <div className="hidden md:flex flex-col    space-y-6 pl-3 pt-5 w-[206px]">
       <Link href="/">
         <div className="flex items-center  gap-x-2">
           {/* <Image src="" alt="logo" height={60} width={60} /> */}
           <span className={cn("font-semibold text-2xl", font.className)}>
-            Board
+            MIRO
           </span>
         </div>
       </Link>
