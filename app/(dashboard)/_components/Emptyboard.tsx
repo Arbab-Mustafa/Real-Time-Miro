@@ -2,20 +2,28 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
-import { useMutation } from "convex/react";
+
 import { ClipboardCheck } from "lucide-react";
 import { useOrganization } from "@clerk/nextjs";
+import useMutationAip from "@/hooks/useMutationAip";
+import { toast } from "sonner";
 
 const Emptyboard = () => {
   const { organization } = useOrganization();
-  const create = useMutation(api.board.create);
+  const { mutate, pending } = useMutationAip(api.board.create);
 
   const handleCLick = () => {
     if (!organization) return;
-    create({
+    mutate({
       orgId: organization.id,
       title: "New Board",
-    });
+    })
+      .then((id) => {
+        toast.success("Board created successfully");
+      })
+      .catch(() => {
+        toast.error("Failed to create board");
+      });
   };
 
   return (
@@ -26,7 +34,7 @@ const Emptyboard = () => {
         Create Your First Board
       </h2>
       <div className="mt-3">
-        <Button size={"lg"} onClick={handleCLick}>
+        <Button size={"lg"} onClick={handleCLick} disabled={pending}>
           Create board
         </Button>
       </div>
