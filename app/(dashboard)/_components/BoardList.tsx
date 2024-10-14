@@ -6,6 +6,7 @@ import Emptyboard from "./Emptyboard";
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
 import BoardCard from "./boardCard";
+import NewBoardBtn from "./NewBoardBtn";
 
 interface BoardListProps {
   orgId: string;
@@ -40,6 +41,7 @@ const BoardList = ({ orgId, query }: BoardListProps) => {
         {query.favorite ? "Favorite Boards" : "Team Boards"}
       </h2>
       <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-4  lg:grid-cols-4  xl:grid-cols-5 2xl:grid-cols-6 gap-5 mt-4 pb-9 ">
+        <NewBoardBtn orgId={orgId} />
         {data.map((board) => (
           <BoardCard
             key={board._id}
