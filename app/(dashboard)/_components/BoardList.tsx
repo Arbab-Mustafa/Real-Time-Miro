@@ -3,6 +3,8 @@ import React from "react";
 import EmptySearch from "./emptySearch";
 import EmptyFav from "./EmptyFav";
 import Emptyboard from "./Emptyboard";
+import { api } from "@/convex/_generated/api";
+import { useQuery } from "convex/react";
 
 interface BoardListProps {
   orgId: string;
@@ -13,7 +15,11 @@ interface BoardListProps {
 }
 
 const BoardList = ({ orgId, query }: BoardListProps) => {
-  const data = [];
+  const data = useQuery(api.boards.get, { orgId });
+
+  if (data === undefined) {
+    return <div>Loading...</div>;
+  }
 
   if (!data.length && query.search) {
     return <EmptySearch />;
@@ -29,9 +35,10 @@ const BoardList = ({ orgId, query }: BoardListProps) => {
 
   return (
     <div>
-      {JSON.stringify({
-        query,
-      })}
+      <h2 className="text-3xl">
+        {query.favorite ? "Favorite Boards" : "Team Boards"}
+      </h2>
+      <div></div>
     </div>
   );
 };
