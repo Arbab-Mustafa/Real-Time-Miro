@@ -15,6 +15,8 @@ import { toast } from "sonner";
 
 import { api } from "@/convex/_generated/api";
 import useMutationAip from "@/hooks/useMutationAip";
+import ConfirmModel from "./ConfirmModel";
+import { Button } from "./ui/button";
 
 interface ActionProps {
   children: React.ReactNode;
@@ -25,7 +27,7 @@ interface ActionProps {
 }
 
 const Action = ({ children, side, sideOffset, id, title }: ActionProps) => {
-  const { mutate } = useMutationAip(api.board.remove);
+  const { mutate, pending } = useMutationAip(api.board.remove);
 
   const copyLink = () => {
     navigator.clipboard
@@ -58,10 +60,21 @@ const Action = ({ children, side, sideOffset, id, title }: ActionProps) => {
           Copy Link
         </DropdownMenuItem>
         {/*  */}
-        <DropdownMenuItem className="p-3 cursor-pointer" onClick={handleDelete}>
-          <Trash2 className="h-4 w-4 mr-2" />
-          Delete
-        </DropdownMenuItem>
+        <ConfirmModel
+          heder="delete Board?"
+          description="this will delete every thing."
+          disabled={pending}
+          onConfirm={handleDelete}
+        >
+          <Button
+            variant="ghost"
+            className="p-3 cursor-pointer text-sm w-full justify-start font-normal"
+            // onClick={handleDelete}
+          >
+            <Trash2 className="h-4 w-4 mr-2" />
+            Delete
+          </Button>
+        </ConfirmModel>
       </DropdownMenuContent>
     </DropdownMenu>
   );
