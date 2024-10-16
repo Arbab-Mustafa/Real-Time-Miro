@@ -6,17 +6,16 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Link2, Trash2 } from "lucide-react";
+import { Link2, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 import { api } from "@/convex/_generated/api";
 import useMutationAip from "@/hooks/useMutationAip";
 import ConfirmModel from "./ConfirmModel";
 import { Button } from "./ui/button";
+import { useRenameModel } from "@/store/useRenameModel";
 
 interface ActionProps {
   children: React.ReactNode;
@@ -27,6 +26,7 @@ interface ActionProps {
 }
 
 const Action = ({ children, side, sideOffset, id, title }: ActionProps) => {
+  const { onOpen } = useRenameModel();
   const { mutate, pending } = useMutationAip(api.board.remove);
 
   const copyLink = () => {
@@ -58,6 +58,14 @@ const Action = ({ children, side, sideOffset, id, title }: ActionProps) => {
         <DropdownMenuItem className="p-3 cursor-pointer" onClick={copyLink}>
           <Link2 className="h-4 w-4 mr-2" />
           Copy Link
+        </DropdownMenuItem>
+        {/*  */}
+        <DropdownMenuItem
+          className="p-3 cursor-pointer"
+          onClick={() => onOpen(id, title)}
+        >
+          <Pencil className="h-4 w-4 mr-2" />
+          Rename Title
         </DropdownMenuItem>
         {/*  */}
         <ConfirmModel
