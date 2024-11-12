@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { Children } from "react";
+import { toast } from "sonner";
+import React from "react";
 import OverLay from "./overLay";
 
+import { api } from "@/convex/_generated/api";
+import useMutationAip from "@/hooks/useMutationAip";
 import { formatDistanceToNow } from "date-fns";
 import { useAuth } from "@clerk/nextjs";
 import Footer from "./footer";
@@ -35,6 +38,27 @@ const BoardCard = ({
   const authorlabel = userId === authorId ? "You" : authorName;
   const createdAtLabel = formatDistanceToNow(createdAt, { addSuffix: true });
 
+  const { mutate: onFavorite, pending: pendingFavorite } = useMutationAip(
+    api.board.favorite
+  );
+  const { mutate: onUnfavorite, pending: pendingUnfavorite } = useMutationAip(
+    api.board.unFavorite
+  );
+
+  //
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      onUnfavorite({ id }).catch(() => {
+        toast.error("Failed to unfavorite board");
+      });
+    } else {
+      onFavorite({ id, orgId }).catch(() => {
+        toast.error("Failed to favorite board");
+      });
+    }
+  };
+
   return (
     <Link href={`/board/${id}`}>
       <div className="group aspect-[100/127] border rounded-lg flex flex-col justify-between overflow-hidden">
@@ -52,8 +76,8 @@ const BoardCard = ({
           title={title}
           authorLabel={authorlabel}
           createdAtLabel={createdAtLabel}
-          onClick={() => {}}
-          disabled={false}
+          onClick={toggleFavorite}
+          disabled={pendingFavorite || pendingUnfavorite}
         />
       </div>
     </Link>
