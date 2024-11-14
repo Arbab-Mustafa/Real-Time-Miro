@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/router";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
@@ -11,6 +12,7 @@ import { toast } from "sonner";
 const Emptyboard = () => {
   const { organization } = useOrganization();
   const { mutate, pending } = useMutationAip(api.board.create);
+  const Router = useRouter();
 
   const handleCLick = () => {
     if (!organization) return;
@@ -20,6 +22,7 @@ const Emptyboard = () => {
     })
       .then((id) => {
         toast.success("Board created successfully");
+        Router.push(`/board/${id}`);
       })
       .catch(() => {
         toast.error("Failed to create board");

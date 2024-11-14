@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { api } from "@/convex/_generated/api";
+import { useRouter } from "next/navigation";
 import useMutationAip from "@/hooks/useMutationAip";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
@@ -14,11 +15,13 @@ interface NewBoardBtnProps {
 
 const NewBoardBtn = ({ orgId, disabled }: NewBoardBtnProps) => {
   const { mutate, pending } = useMutationAip(api.board.create);
+  const Router = useRouter();
 
   const handleClick = () => {
     mutate({ orgId, title: "New Board" })
       .then((res) => {
         toast.success("Board created successfully");
+        Router.push(`/board/${res}`);
       })
       .catch((err) => {
         toast.error("Failed to create board");
