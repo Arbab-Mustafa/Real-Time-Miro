@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
