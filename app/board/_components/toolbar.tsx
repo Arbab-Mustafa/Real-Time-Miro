@@ -8,6 +8,10 @@ const Toolbar = () => {
         <div>Square</div>
         <div>Circle</div>
       </div>
+      <div className="flex flex-col bg-white rounded-md p-1.5 items-center shadow-md">
+        <div>Undo</div>
+        <div>Redo</div>
+      </div>
     </div>
   );
 };
