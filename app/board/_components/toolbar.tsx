@@ -17,3 +17,9 @@ const Toolbar = () => {
 };
 
 export default Toolbar;
+
+Toolbar.Skeleton = function ToolbarSkeleton() {
+  return (
+    <div className="flex flex-col gap-y-4 absolute top-[50%]   shadow-md  rounded-md -translate-y-[50%] bg-white h-[360px] w-[52px]" />
+  );
+};
