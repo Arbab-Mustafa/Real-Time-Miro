@@ -3,6 +3,7 @@ import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 // import Image from "next/image";
 import { Poppins } from "next/font/google";
+import Action from "@/components/action";
 
 import { cn } from "../../../lib/utils";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,8 @@ import Link from "next/link";
 import Hint from "@/components/hint";
 
 import { useRenameModel } from "@/store/useRenameModel";
+import { Separator } from "@radix-ui/react-dropdown-menu";
+import { Menu } from "lucide-react";
 
 //
 interface BoardInfoProps {
@@ -54,13 +57,27 @@ const BoardInfo = ({ boardId }: BoardInfoProps) => {
       </Hint>
 
       <TabSeparator />
-      <Button
-        variant="board"
-        className="text-base px-2 font-normal"
-        onClick={() => onOpen(data?._id, data.title)}
-      >
-        {data.title}
-      </Button>
+
+      <Hint label="Edit Title" side="bottom" sideOffset={10}>
+        <Button
+          variant="board"
+          className="text-base px-2 font-normal"
+          onClick={() => onOpen(data?._id, data.title)}
+        >
+          {data.title}
+        </Button>
+      </Hint>
+
+      <Separator />
+      <Action id={data._id} title={data.title} side="bottom" sideOffset={10}>
+        <div>
+          <Hint label="main Menu" side="bottom" sideOffset={10}>
+            <Button size="icon" variant="board">
+              <Menu />
+            </Button>
+          </Hint>
+        </div>
+      </Action>
     </div>
   );
 };
