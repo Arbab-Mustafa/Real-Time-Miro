@@ -1,8 +1,8 @@
+"use client";
 import { Loader } from "lucide-react";
 import React from "react";
 import BoardInfo from "./info";
 import Participants from "./participants";
-import Toolbar from "./toolbar";
 
 const Loading = () => {
   return (
@@ -10,7 +10,6 @@ const Loading = () => {
       <Loader className="w-6 h-6  text-muted-foreground animate-spin" />
       <BoardInfo.Skeleton />
       <Participants.Skeleton />
-      <Toolbar.Skeleton />
     </main>
   );
 };
