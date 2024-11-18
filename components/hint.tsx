@@ -6,7 +6,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 interface HintProp {
-  label: string;
+  label?: string;
   children: React.ReactNode;
   side?: "top" | "bottom" | "left" | "right";
   aling?: "start" | "center" | "end";
