@@ -58,7 +58,7 @@ const Toolbar = () => {
           label="Redo"
           icon={Redo2}
           onClick={() => {}}
-          isActive={false}
+          // isActive={false}
         />
       </div>
     </div>
