@@ -26,6 +26,27 @@ export type RectangleLayer = {
   fill: Color;
   value?: string;
 };
+
+export type EllipseLayer = {
+  type: LayredType.Ellipse;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  fill: Color;
+  value?: string;
+};
+
+export type PathLayer = {
+  type: LayredType.Path;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  fill: Color;
+  points: number[][];
+  value?: string;
+};
 export enum CanvasMode {
   None,
   Pressing,
