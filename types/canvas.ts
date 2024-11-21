@@ -47,6 +47,27 @@ export type PathLayer = {
   points: number[][];
   value?: string;
 };
+
+export type TextleLayer = {
+  type: LayredType.Text;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  fill: Color;
+  value?: string;
+};
+
+export type NoteLayer = {
+  type: LayredType.Note;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  fill: Color;
+  value?: string;
+};
+
 export enum CanvasMode {
   None,
   Pressing,
