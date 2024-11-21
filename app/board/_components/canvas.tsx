@@ -31,6 +31,7 @@ const Canvas = ({ boardId }: CanvasProps) => {
         undo={history.undo}
         redo={history.redo}
       />
+      <svg></svg>
     </main>
   );
 };
