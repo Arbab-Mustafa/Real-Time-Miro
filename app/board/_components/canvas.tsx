@@ -1,10 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import BoardInfo from "./info";
 import Participants from "./participants";
 import Toolbar from "./toolbar";
-import { CanvasMode, CanvasState } from "@/types/canvas";
-import { useHistory, useCanRedo, useCanUndo } from "@/liveblocks.config";
+import { Camera, CanvasMode, CanvasState } from "@/types/canvas";
+import {
+  useHistory,
+  useCanRedo,
+  useCanUndo,
+  useMutation,
+} from "@/liveblocks.config";
+import { CursorPresent } from "./CursorPresent";
 
 interface CanvasProps {
   boardId: string;
@@ -15,9 +21,28 @@ const Canvas = ({ boardId }: CanvasProps) => {
     Mode: CanvasMode.None,
   });
 
+  const [camera, setCamera] = useState<Camera>({ x: 0, y: 0 });
+
+  const onWheel = useCallback((e: React.WheelEvent) => {
+    setCamera((camera) => ({
+      x: camera.x - e.deltaX,
+      y: camera.y - e.deltaY,
+    }));
+  }, []);
+
   const history = useHistory();
   const canUndo = useCanUndo();
   const canRedo = useCanRedo();
+
+  const onPointerMove = useMutation(
+    ({ setMyPresence }, e: React.PointerEvent) => {
+      e.preventDefault();
+
+      const current = { x: 0, y: 0 };
+      setMyPresence({ cursor: current });
+    },
+    [boardId]
+  );
 
   return (
     <main className="h-full w-full relative  bg-neutral-100 touch-none">
@@ -31,7 +56,15 @@ const Canvas = ({ boardId }: CanvasProps) => {
         undo={history.undo}
         redo={history.redo}
       />
-      <svg></svg>
+      <svg
+        className="h-[100vh] w-[100vw]"
+        onWheel={onWheel}
+        onPointerMove={onPointerMove}
+      >
+        <g>
+          <CursorPresent />
+        </g>
+      </svg>
     </main>
   );
 };
