@@ -16,6 +16,16 @@ export enum LayredType {
   Text,
   Note,
 }
+
+export type RectangleLayer = {
+  type: LayredType.Rectangle;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  fill: Color;
+  value?: string;
+};
 export enum CanvasMode {
   None,
   Pressing,
