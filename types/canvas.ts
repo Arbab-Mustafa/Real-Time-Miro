@@ -9,7 +9,7 @@ export type Camera = {
   y: number;
 };
 
-export enum LayredType {
+export enum LayerType {
   Rectangle,
   Path,
   Ellipse,
@@ -37,7 +37,7 @@ export enum Side {
 }
 
 export type RectangleLayer = {
-  type: LayredType.Rectangle;
+  type: LayerType.Rectangle;
   x: number;
   y: number;
   width: number;
@@ -47,7 +47,7 @@ export type RectangleLayer = {
 };
 
 export type EllipseLayer = {
-  type: LayredType.Ellipse;
+  type: LayerType.Ellipse;
   x: number;
   y: number;
   width: number;
@@ -57,7 +57,7 @@ export type EllipseLayer = {
 };
 
 export type PathLayer = {
-  type: LayredType.Path;
+  type: LayerType.Path;
   x: number;
   y: number;
   width: number;
@@ -68,7 +68,7 @@ export type PathLayer = {
 };
 
 export type TextleLayer = {
-  type: LayredType.Text;
+  type: LayerType.Text;
   x: number;
   y: number;
   width: number;
@@ -78,7 +78,7 @@ export type TextleLayer = {
 };
 
 export type NoteLayer = {
-  type: LayredType.Note;
+  type: LayerType.Note;
   x: number;
   y: number;
   width: number;
@@ -109,11 +109,11 @@ export type CanvasState =
   | {
       Mode: CanvasMode.Inserting;
       LayerType:
-        | LayredType.Ellipse
-        | LayredType.Path
-        | LayredType.Rectangle
-        | LayredType.Text
-        | LayredType.Note;
+        | LayerType.Ellipse
+        | LayerType.Path
+        | LayerType.Rectangle
+        | LayerType.Text
+        | LayerType.Note;
     }
   | {
       Mode: CanvasMode.Pressing;
