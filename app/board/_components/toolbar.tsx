@@ -36,7 +36,13 @@ const Toolbar = ({
           label="Select"
           icon={MousePointer2}
           onClick={() => setCanvasState({ Mode: CanvasMode.None })}
-          isActive={canvasState.Mode === CanvasMode.None}
+          isActive={
+            canvasState.Mode === CanvasMode.None ||
+            canvasState.Mode === CanvasMode.Pressing ||
+            canvasState.Mode === CanvasMode.Translating ||
+            canvasState.Mode === CanvasMode.SelectingNet ||
+            canvasState.Mode === CanvasMode.Resizing
+          }
         />
         <ToolBtn
           label="Text"
