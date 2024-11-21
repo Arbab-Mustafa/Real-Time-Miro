@@ -41,8 +41,8 @@ const Toolbar = ({
         <ToolBtn
           label="Text"
           icon={Type}
-          onClick={() => setCanvasState({ Mode: CanvasMode.inserting })}
-          isActive={canvasState.Mode === CanvasMode.inserting}
+          onClick={() => setCanvasState({ Mode: CanvasMode.Inserting })}
+          isActive={canvasState.Mode === CanvasMode.Inserting}
         />
         <ToolBtn
           label="Sticky note"

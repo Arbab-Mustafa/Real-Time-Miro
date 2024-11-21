@@ -17,6 +17,25 @@ export enum LayredType {
   Note,
 }
 
+export type Point = {
+  x: number;
+  y: number;
+};
+
+export type XYWH = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
+
+export enum Side {
+  Top = 1,
+  Right = 2,
+  Bottom = 4,
+  Left = 8,
+}
+
 export type RectangleLayer = {
   type: LayredType.Rectangle;
   x: number;
@@ -73,7 +92,7 @@ export enum CanvasMode {
   Pressing,
   Translating,
   SelectingNet,
-  inserting,
+  Inserting,
   Pencil,
   Resizing,
 }
@@ -84,19 +103,31 @@ export type CanvasState =
     }
   | {
       Mode: CanvasMode.SelectingNet;
+      Origin: Point;
+      Current?: Point;
     }
   | {
-      Mode: CanvasMode.inserting;
+      Mode: CanvasMode.Inserting;
+      LayerType:
+        | LayredType.Ellipse
+        | LayredType.Path
+        | LayredType.Rectangle
+        | LayredType.Text
+        | LayredType.Note;
     }
   | {
       Mode: CanvasMode.Pressing;
+      Origin: Point;
     }
   | {
       Mode: CanvasMode.Translating;
+      Origin: Point;
     }
   | {
       Mode: CanvasMode.Pencil;
     }
   | {
       Mode: CanvasMode.Resizing;
+      InitialBounce: XYWH;
+      Cornor: Side;
     };
