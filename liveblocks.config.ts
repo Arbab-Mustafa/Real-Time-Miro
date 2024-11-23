@@ -7,6 +7,7 @@ const client = createClient({ authEndpoint: "/api/livebloack-auth" });
 // and that will automatically be kept in sync. Accessible through the
 // `user.presence` property. Must be JSON-serializable.
 type Presence = {
+  throttle: 16;
   cursor: { x: number; y: number } | null;
 };
 
