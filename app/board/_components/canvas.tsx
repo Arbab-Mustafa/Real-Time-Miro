@@ -68,7 +68,11 @@ const Canvas = ({ boardId }: CanvasProps) => {
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
       >
-        <g>
+        <g
+          style={{
+            transform: `translate(${camera.x}px, ${camera.y}px)`,
+          }}
+        >
           <CursorPresent />
         </g>
       </svg>
