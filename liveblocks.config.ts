@@ -1,5 +1,12 @@
-import { createClient } from "@liveblocks/client";
+import {
+  createClient,
+  LiveList,
+  LiveMap,
+  LiveObject,
+} from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
+
+import { Layer, Color } from "@/types/canvas";
 
 const client = createClient({ authEndpoint: "/api/livebloack-auth" });
 
@@ -9,6 +16,7 @@ const client = createClient({ authEndpoint: "/api/livebloack-auth" });
 type Presence = {
   throttle: 16;
   cursor: { x: number; y: number } | null;
+  selection: string[];
 };
 
 // Optionally, Storage represents the shared document that persists in the
@@ -16,8 +24,8 @@ type Presence = {
 // LiveList, LiveMap, LiveObject instances, for which updates are
 // automatically persisted and synced to all connected clients.
 type Storage = {
-  // author: LiveObject<{ firstName: string, lastName: string }>,
-  // ...
+  layers: LiveMap<string, LiveObject<Layer>>;
+  layersId: LiveList<string>;
 };
 
 // Optionally, UserMeta represents static/readonly metadata on each user, as

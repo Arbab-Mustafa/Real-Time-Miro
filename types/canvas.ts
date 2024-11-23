@@ -131,3 +131,10 @@ export type CanvasState =
       InitialBounce: XYWH;
       Cornor: Side;
     };
+
+export type Layer =
+  | RectangleLayer
+  | EllipseLayer
+  | PathLayer
+  | TextleLayer
+  | NoteLayer;
