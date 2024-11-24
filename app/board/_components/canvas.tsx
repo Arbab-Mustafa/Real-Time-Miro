@@ -68,7 +68,6 @@ const Canvas = ({ boardId }: CanvasProps) => {
       if (liveLayers.size >= MAX_LAYER) {
         return;
       }
-
       const LivelayerIds = storage.get("layersId");
       const layerId = nanoid();
 
@@ -81,7 +80,6 @@ const Canvas = ({ boardId }: CanvasProps) => {
         height: 100,
         fill: lastUsedColor,
       });
-
       LivelayerIds.push(layerId);
       liveLayers.set(layerId, layer);
       setMyPresence({ selection: [layerId] }, { addToHistory: true });
@@ -89,7 +87,6 @@ const Canvas = ({ boardId }: CanvasProps) => {
     },
     [lastUsedColor]
   );
-
   const onPointerMove = useMutation(
     ({ setMyPresence }, e: React.PointerEvent) => {
       e.preventDefault();
@@ -100,10 +97,23 @@ const Canvas = ({ boardId }: CanvasProps) => {
     },
     [boardId]
   );
-
   const onPointerLeave = useMutation(({ setMyPresence }) => {
     setMyPresence({ cursor: null });
   }, []);
+
+  const onPointerUp = useMutation(
+    ({}, e) => {
+      const point = pointerEventtoCanvasPoint(e, camera);
+      if (canvasState.Mode === CanvasMode.Inserting) {
+        insertLayer(canvasState.layerType, point);
+      } else {
+        setCanvasState({ Mode: CanvasMode.None });
+      }
+
+      history.resume();
+    },
+    [camera, canvasState, history, insertLayer]
+  );
 
   return (
     <main className="h-full w-full relative  bg-neutral-100 touch-none">
